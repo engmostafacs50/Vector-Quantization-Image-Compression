@@ -59,3 +59,54 @@ def blocks_to_vectors(blocks):
     return vectors
 
 
+def vectors_to_blocks(vectors, block_height, block_width, channels=1):
+
+    if channels == 1:
+        blocks = vectors.reshape(
+            len(vectors),
+            block_height,
+            block_width
+        )
+    else:
+        blocks = vectors.reshape(
+            len(vectors),
+            block_height,
+            block_width,
+            channels
+        )
+
+    return blocks
+
+
+def blocks_to_image(blocks, padded_height, padded_width,
+                    block_height, block_width):
+
+    blocks_per_row = padded_width // block_width
+
+    channels = blocks.shape[-1] if blocks.ndim == 4 else None
+
+    if channels is None:
+        image = np.zeros(
+            (padded_height, padded_width),
+            dtype=blocks.dtype
+        )
+    else:
+        image = np.zeros(
+            (padded_height, padded_width, channels),
+            dtype=blocks.dtype
+        )
+
+    for index, block in enumerate(blocks):
+
+        row = index // blocks_per_row
+        col = index % blocks_per_row
+
+        start_row = row * block_height
+        start_col = col * block_width
+
+        image[
+            start_row:start_row + block_height,
+            start_col:start_col + block_width
+        ] = block
+
+    return image
