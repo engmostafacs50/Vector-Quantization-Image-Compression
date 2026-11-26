@@ -110,3 +110,9 @@ def blocks_to_image(blocks, padded_height, padded_width,
         ] = block
 
     return image
+
+
+def crop_image(image, original_height, original_width):
+    cropped_image = image[:original_height, :original_width]
+
+    return cropped_image
