@@ -57,3 +57,5 @@ def blocks_to_vectors(blocks):
     vectors = blocks.reshape(number_of_blocks, -1)
 
     return vectors
+
+

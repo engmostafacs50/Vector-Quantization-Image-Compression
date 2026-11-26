@@ -27,3 +27,9 @@ def decode_labels(bitstream, k, padding=0):
         labels.append(label)
 
     return np.array(labels)
+
+
+def decode_vectors(labels, codebook):
+    vectors = codebook[labels]
+
+    return vectors
