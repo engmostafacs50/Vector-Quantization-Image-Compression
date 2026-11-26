@@ -1,5 +1,6 @@
+import json
 import numpy as np
-import numpy as np
+from pathlib import Path
 
 from src.image_handler import (
     load_image,
@@ -96,3 +97,23 @@ def compress_image(
         "packed_data": packed_data,
         "metadata": metadata
     }
+    
+    
+
+
+
+def save_compressed_files(compressed_data, output_dir):
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Save Codebook
+    np.save(
+        output_dir / "codebook.npy",
+        compressed_data["codebook"]
+    )
+
+    with open(output_dir / "compressed.bin", "wb") as file:
+        file.write(compressed_data["packed_data"])
+
+    with open(output_dir / "metadata.json", "w") as file:
+        json.dump(compressed_data["metadata"], file, indent=4)
