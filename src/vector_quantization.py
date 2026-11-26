@@ -56,7 +56,7 @@ def train_codebook(vectors, k, max_iterations=100):
         
     for i in range(max_iterations) :
         labels = assign_clusters(vectors , codebook)
-        new_codebook = update_centroids(vectors , labels , k)
+        new_codebook = update_centroids(vectors , labels , codebook)
         
         if np.allclose(codebook, new_codebook):
             codebook = new_codebook
