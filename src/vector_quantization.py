@@ -24,3 +24,17 @@ def assign_clusters(vectors, codebook):
         labels.append(closest_centroid)
 
     return np.array(labels)  
+
+def update_centroids(vectors, labels, k):
+    new_centroids = []
+    for i in range(k) :
+        
+        cluster_vectors = vectors[labels == i] 
+        
+        new_centroid = np.mean(cluster_vectors , axis = 0)
+        
+        new_centroids.append(new_centroid)
+        
+    return np.array(new_centroids)
+        
+    
