@@ -37,4 +37,24 @@ def update_centroids(vectors, labels, k):
         
     return np.array(new_centroids)
         
+def split_centroid(centroid , elipson = 0.01) :
+    c0 = centroid * (1 - elipson) 
+    c1 = centroid * (1 + elipson)
     
+    return c0 , c1  
+
+
+def train_codebook(vectors, k, max_iterations=100):
+    initial_centroid = np.mean(vectors , axis = 0)
+    c0 , c1 = split_centroid(initial_centroid)
+    codebook = np.array([c0, c1])
+    for i in range(max_iterations) :
+        labels = assign_clusters(vectors , codebook)
+        new_codebook = update_centroids(vectors , labels , k)
+        
+        if np.allclose(codebook, new_codebook):
+            codebook = new_codebook
+            break
+        codebook = new_codebook 
+        
+    return codebook 
