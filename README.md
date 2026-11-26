@@ -47,7 +47,7 @@ The project allows users to compress and decompress images using Vector Quantiza
 ## Installation
 
 ```bash
-git clone https://github.com/USERNAME/Vector-Quantization.git
+git clone https://github.com/engmostafacs50/Vector-Quantization-Image-Compression.git
 cd Vector-Quantization
 pip install -r requirements.txt
 ```
