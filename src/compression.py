@@ -23,11 +23,3 @@ def pack_bits(bitstream):
 
     return packed_data, padding
 
-def unpack_bits(packed_data):
-    bitstream = ""
-
-    for byte in packed_data:
-        binary = format(byte, "08b")
-        bitstream += binary
-
-    return bitstream

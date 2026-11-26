@@ -1,6 +1,7 @@
 from src.compression import encode_labels
 from src.compression import pack_bits
 
+
 def test_encode_labels():
     labels = [0, 0, 1, 1]
 
