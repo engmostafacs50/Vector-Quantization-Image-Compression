@@ -1,12 +1,7 @@
 import numpy as np 
 
-def euclidean_distance(vector1, vector2):
-    differences = vector1 - vector2
-    squared_differences = differences ** 2
-    sum_squared_differences = np.sum(squared_differences)
-    distance = np.sqrt(sum_squared_differences)
-
-    return distance
+def manhattan_distance(vector1, vector2):
+    return np.sum(np.abs(vector1 - vector2))
 
 
 def assign_clusters(vectors, codebook):
@@ -16,7 +11,7 @@ def assign_clusters(vectors, codebook):
         distances = []
 
         for centroid in codebook:
-            distance = euclidean_distance(vector, centroid)
+            distance = manhattan_distance(vector, centroid)
             distances.append(distance)
 
         closest_centroid = np.argmin(distances)
@@ -36,11 +31,11 @@ def update_centroids(vectors, labels, k):
         
     return np.array(new_centroids)
         
-def split_centroid(centroid , elipson = 0.01) :
-    c0 = centroid * (1 - elipson) 
-    c1 = centroid * (1 + elipson)
-    
-    return c0 , c1  
+def split_centroid(centroid):
+    c0 = np.floor(centroid)
+    c1 = np.ceil(centroid)
+
+    return c0, c1
 
 
 def train_codebook(vectors, k, max_iterations=100):
