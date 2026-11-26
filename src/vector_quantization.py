@@ -1,6 +1,5 @@
 import numpy as np 
 
-
 def euclidean_distance(vector1, vector2):
     differences = vector1 - vector2
     squared_differences = differences ** 2
@@ -65,6 +64,7 @@ def train_codebook(vectors, k, max_iterations=100):
         if np.allclose(codebook, new_codebook):
             codebook = new_codebook
             break
+        
         codebook = new_codebook 
         
     return codebook 

@@ -37,3 +37,16 @@ def pad_image(image , block_height , block_width) :
         padded_image = np.pad(image,padding,mode="constant",constant_values=0)
         
         return padded_image 
+
+def image_to_blocks(image, block_height, block_width):
+    height , width = image.shape[0 : 2]
+    
+    blocks = []
+    
+    for i in range(0 , height , block_height) :
+        for j in range(0 , width , block_width) :
+            block = image[
+                i : i + block_height , j : j + block_width
+            ]
+            blocks.append(block)
+    return np.array(blocks)
