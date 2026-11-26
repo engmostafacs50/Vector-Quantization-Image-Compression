@@ -50,3 +50,10 @@ def image_to_blocks(image, block_height, block_width):
             ]
             blocks.append(block)
     return np.array(blocks)
+
+def blocks_to_vectors(blocks):
+    number_of_blocks = len(blocks)
+
+    vectors = blocks.reshape(number_of_blocks, -1)
+
+    return vectors
