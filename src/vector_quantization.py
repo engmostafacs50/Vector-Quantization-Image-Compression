@@ -19,16 +19,18 @@ def assign_clusters(vectors, codebook):
 
     return np.array(labels)  
 
-def update_centroids(vectors, labels, k):
+def update_centroids(vectors, labels, codebook):
     new_centroids = []
-    for i in range(k) :
-        
-        cluster_vectors = vectors[labels == i] 
-        
-        new_centroid = np.mean(cluster_vectors , axis = 0)
-        
-        new_centroids.append(new_centroid)
-        
+
+    for i in range(len(codebook)):
+        cluster_vectors = vectors[labels == i]
+
+        if len(cluster_vectors) == 0:
+            new_centroids.append(codebook[i])
+        else:
+            new_centroid = np.mean(cluster_vectors, axis=0)
+            new_centroids.append(new_centroid)
+
     return np.array(new_centroids)
         
 def split_centroid(centroid):
