@@ -1,4 +1,4 @@
-# Vector Quantization - Image Compression
+# Vector Quantization - Image Compression .
 
 A Python implementation of Vector Quantization for image compression and decompression.
 
